@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import api from '../utils/api.js';
+import Spinner from 'react-spinkit';
 
 function ReposGrid(props) {
   return(
@@ -99,7 +100,7 @@ class Popular extends Component {
           selectedLanguage = {this.state.selectedLanguage}
           onSelect = {this.updateLanguage}
          />
-         {!this.state.repos ? <p>Loading</p> : <ReposGrid repos = {this.state.repos} /> }
+         {!this.state.repos ? <Spinner name='line-scale' color="steelblue" className="spinner"/> : <ReposGrid repos = {this.state.repos} /> }
       </div>
     );      
   }

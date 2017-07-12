@@ -126,4 +126,8 @@ a{
   font-weight: 200;
 }
 
-
+.spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
