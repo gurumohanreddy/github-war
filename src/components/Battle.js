@@ -1,5 +1,6 @@
 import React , { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 
 function PlayerPreview(props) {
@@ -92,7 +93,7 @@ class Battle extends Component {
       playerTwoImage: null,
     }
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.onReset = this.onReset.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
 
   handleSubmit(id, username) {
@@ -104,7 +105,7 @@ class Battle extends Component {
     });
   }
 
-  onReset(id) {
+  handleReset(id) {
     this.setState(function() {
       let newState = {};
       newState[id+'Name'] = '';
@@ -125,7 +126,7 @@ class Battle extends Component {
             /> : 
             <PlayerPreview 
               id = 'playerOne'
-              onReset = {this.onReset}
+              onReset = {this.handleReset}
               avatar = {this.state.playerOneImage}
               username = {this.state.playerOneName}
             />}
@@ -137,11 +138,23 @@ class Battle extends Component {
             /> : 
             <PlayerPreview 
               id = 'playerTwo'
-              onReset = {this.onReset}
+              onReset = {this.handleReset}
               avatar = {this.state.playerTwoImage}
               username = {this.state.playerTwoName}
             />}
         </div>
+        {this.state.playerOneName && this.state.playerTwoName &&
+          <Link 
+            to = {
+              {
+                pathname: this.props.match.url +'/results',
+                search: `?playerOneName=${this.state.playerOneName}&playerTwoName=${this.state.playerTwoName}`,
+              }
+            }
+            className="button">
+            Battle
+          </Link>
+        }
       </div>
     )
   }
