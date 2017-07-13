@@ -1,30 +1,8 @@
 import React , { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import PlayerPreview from './PlayerPreview.js'
 
-
-function PlayerPreview(props) {
-  return(
-    <div>
-      <div className="column">
-        <img src={props.avatar} alt={"Avatar for "+props.username} className="avatar"/>
-        <h2 className="username">@{props.username}</h2>
-      </div>
-      <button 
-        className="reset"
-        onClick = {props.onReset.bind(null, props.id)}>
-        Reset
-      </button>
-    </div>
-  )
-}
-
-PlayerPreview.propTypes = {
-  id: PropTypes.string.isRequired,
-  avatar: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired,
-  onReset: PropTypes.func.isRequired 
-}
 
 class PlayerInput extends Component {
   constructor(props) {
@@ -125,11 +103,15 @@ class Battle extends Component {
               onSubmit = {this.handleSubmit}
             /> : 
             <PlayerPreview 
-              id = 'playerOne'
-              onReset = {this.handleReset}
               avatar = {this.state.playerOneImage}
               username = {this.state.playerOneName}
-            />}
+            > 
+              <button 
+                className="reset"
+                onClick = {this.handleReset.bind(null, 'playerOne')}>
+                Reset
+              </button>
+            </PlayerPreview>}
           {!this.state.playerTwoName ? 
             <PlayerInput
               id = 'playerTwo'
@@ -137,11 +119,15 @@ class Battle extends Component {
               onSubmit = {this.handleSubmit}
             /> : 
             <PlayerPreview 
-              id = 'playerTwo'
-              onReset = {this.handleReset}
               avatar = {this.state.playerTwoImage}
               username = {this.state.playerTwoName}
-            />}
+            >
+              <button 
+                className="reset"
+                onClick = {this.handleReset.bind(null, 'playerTwo')}>
+                Reset
+              </button>
+            </PlayerPreview>}
         </div>
         {this.state.playerOneName && this.state.playerTwoName &&
           <Link 
